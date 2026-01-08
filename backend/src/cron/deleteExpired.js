@@ -2,7 +2,6 @@ import cron from "node-cron";
 import cloudinary from "../utils/cloudinary.js";
 
 cron.schedule("0 3 * * *", async () => {
-  console.log("🧹 Running cleanup job...");
 
   try {
     const result = await cloudinary.search
@@ -20,7 +19,6 @@ cron.schedule("0 3 * * *", async () => {
       await cloudinary.uploader.destroy(file.public_id, {
         resource_type: file.resource_type,
       });
-      console.log("🗑 Deleted", file.public_id);
     }
 
   } catch (err) {
